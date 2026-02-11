@@ -1,9 +1,9 @@
 <script setup>
-console.log("hello vue");
+const say = "Hello Vue";
 </script>
 
 <template>
-  <h1 class="h1">Hello Vue</h1>
+  <h1 class="h1">{{ say }}</h1>
 </template>
 
 <style scoped>
