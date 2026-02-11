@@ -25,6 +25,10 @@ const data = {
   <!-- Multiple Attributes -->
   <h1 v-bind="data">{{ say }}</h1>
   <h1 :class="data.class">{{ say }}</h1>
+
+  <!-- Javascript Expression di template-->
+  <h1 v-bind="data">{{ say.toUpperCase() }}</h1>
+  <h1 v-bind="data">{{ 100 * 200 }}</h1>
 </template>
 
 <style scoped>
