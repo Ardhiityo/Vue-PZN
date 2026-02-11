@@ -4,6 +4,11 @@ const say_raw = "<h1>Hello Vue Raw</h1>";
 const h1 = "h1";
 
 const show_disabled = true;
+
+const data = {
+  id: "h1",
+  class: "h1",
+};
 </script>
 
 <template>
@@ -16,6 +21,10 @@ const show_disabled = true;
   <h1 :id="h1" :class="h1">Hello Vue Class</h1>
 
   <button :disabled="show_disabled">Button</button>
+
+  <!-- Multiple Attribute -->
+  <h1 v-bind="data">{{ say }}</h1>
+  <h1 :class="data.class">{{ say }}</h1>
 </template>
 
 <style scoped>
