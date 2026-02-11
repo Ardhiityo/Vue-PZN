@@ -22,7 +22,7 @@ const data = {
 
   <button :disabled="show_disabled">Button</button>
 
-  <!-- Multiple Attribute -->
+  <!-- Multiple Attributes -->
   <h1 v-bind="data">{{ say }}</h1>
   <h1 :class="data.class">{{ say }}</h1>
 </template>
