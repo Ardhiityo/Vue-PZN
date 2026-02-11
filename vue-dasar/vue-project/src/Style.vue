@@ -11,6 +11,15 @@ function toggleRed() {
 function toggleBold() {
   am_bold.value = !am_bold.value;
 }
+
+const style1 = {
+  color: "blue",
+};
+
+const style2 = {
+  fontWeight: "bold",
+  textTransform: "uppercase",
+};
 </script>
 
 <template>
@@ -20,6 +29,9 @@ function toggleBold() {
   <button @click="toggleBold">Bold</button>
 
   <h3 :class="['red', 'bold']">Style</h3>
+
+  <p :style="style1">Inline Style 1</p>
+  <p :style="[style1, style2]">Inline Style 1 & 2</p>
 </template>
 
 <style scoped>
