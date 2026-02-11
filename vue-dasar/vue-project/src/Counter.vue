@@ -1,16 +1,26 @@
 <script setup>
 import { ref } from "vue";
 
-const count = ref(0);
+// Simple Reactive State
+// const count = ref(0);
+// function increment() {
+//   count.value++;
+// }
+
+// Object Reactive State
+const counter = ref({
+  name: "Budi",
+  count: 0,
+});
 
 function increment() {
-  count.value++;
+  counter.value.count++;
 }
 </script>
 
 <template>
   <!-- Reactive State -->
-  <h1>{{ count }}</h1>
+  <h1>Counter {{ counter.name }} : {{ counter.count }}</h1>
 
   <!-- Cara 1 -->
   <!-- <button @click="increment">Tambah</button> -->
