@@ -2,6 +2,8 @@
 const say = "Hello Vue";
 const say_raw = "<h1>Hello Vue Raw</h1>";
 const h1 = "h1";
+
+const show_disabled = true;
 </script>
 
 <template>
@@ -12,6 +14,8 @@ const h1 = "h1";
   <h1 v-bind:id="h1" v-bind:class="h1">Hello Vue Class</h1>
   <!-- Cara 2 -->
   <h1 :id="h1" :class="h1">Hello Vue Class</h1>
+
+  <button :disabled="show_disabled">Button</button>
 </template>
 
 <style scoped>
