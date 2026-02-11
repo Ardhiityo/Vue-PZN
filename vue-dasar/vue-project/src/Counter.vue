@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 
 // Simple Reactive State
 // const count = ref(0);
@@ -13,8 +13,23 @@ const counter = ref({
   count: 0,
 });
 
-function increment() {
+async function increment() {
+  console.log(counter.value.count); //0
+
   counter.value.count++;
+  await nextTick();
+  //memastikan kode berjalan setelah terupdate.
+  console.log(counter.value.count); //1
+
+  counter.value.count++;
+  await nextTick();
+  //memastikan kode berjalan setelah terupdate.
+  console.log(counter.value.count); //2
+
+  counter.value.count++;
+  await nextTick();
+  //memastikan kode berjalan setelah terupdate.
+  console.log(counter.value.count); //3
 }
 </script>
 
