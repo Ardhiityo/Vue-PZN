@@ -1,4 +1,4 @@
 import { createApp } from "vue";
-import Counter from "./Counter.vue";
+import MultipleCounter from "./MultipleCounter.vue";
 
-createApp(Counter).mount("#app");
+createApp(MultipleCounter).mount("#app");
