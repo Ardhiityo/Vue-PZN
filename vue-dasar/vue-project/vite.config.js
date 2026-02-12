@@ -24,7 +24,8 @@ export default defineConfig({
         'say-hello': 'say-hello.html',
         'style': 'style.html',
         'score': 'score.html',
-        'todolist' : 'todolist.html'
+        'todolist' : 'todolist.html',
+        'contact' : 'contact.html'
       },
     },
   },
