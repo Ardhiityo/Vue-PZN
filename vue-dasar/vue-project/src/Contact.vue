@@ -1,13 +1,14 @@
 <script setup>
 import { reactive } from "vue";
 import ContactForm from "./ContactForm.vue";
+import ContactList from "./ContactList.vue";
 
 const form = reactive({
   name: "",
   email: "",
-  age: "",
+  age: 0,
   type: "",
-  complain: "",
+  complain: false,
   message: "",
 });
 </script>
@@ -16,14 +17,12 @@ const form = reactive({
   <h1>Contact Us</h1>
 
   <ContactForm v-model="form" />
-
-  <h1>Preview</h1>
-  <section>
-    <p>Name: {{ form.name }}</p>
-    <p>Email: {{ form.email }}</p>
-    <p>Age: {{ form.age }}</p>
-    <p>Type: {{ form.type }}</p>
-    <p>Complain: {{ form.complain }}</p>
-    <p>Message: {{ form.message }}</p>
-  </section>
+  <ContactList
+    v-model:name="form.name"
+    v-model:email="form.email"
+    v-model:age="form.age"
+    v-model:type="form.type"
+    v-model:complain="form.complain"
+    v-model:message="form.message"
+  />
 </template>
