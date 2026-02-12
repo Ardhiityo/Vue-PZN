@@ -31,4 +31,9 @@ const todos = [
   <ul v-for="(todo, index) in todos" :key="index">
     <li v-for="(value, key) in todo" :key="key">{{ key }} : {{ value }}</li>
   </ul>
+
+  <!-- List for Range -->
+  <ul>
+    <li v-for="n in 10" :key="n">Hello, {{ n }}</li>
+  </ul>
 </template>
