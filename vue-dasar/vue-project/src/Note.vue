@@ -4,11 +4,17 @@ import { ref, reactive, useTemplateRef } from "vue";
 const note = ref("");
 const notes = reactive([]);
 const inputNote = useTemplateRef("inputNote");
+const notesList = useTemplateRef("notesList");
 
 const addNote = () => {
   notes.push(note.value);
   note.value = "";
   inputNote.value.focus();
+  if (notesList.value) {
+    notesList.value.forEach((li) => {
+      console.log(li.textContent);
+    });
+  }
 };
 </script>
 
@@ -23,7 +29,9 @@ const addNote = () => {
   <div>
     <h1>List Notes</h1>
     <ul>
-      <li v-for="(note, index) in notes" :key="index">{{ note }}</li>
+      <li v-for="(note, index) in notes" :key="index" ref="notesList">
+        {{ note }}
+      </li>
     </ul>
   </div>
 </template>
