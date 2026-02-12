@@ -7,7 +7,7 @@ import Counter from "./Counter.vue";
     <h1>Multiple Counter</h1>
 
     <!-- Walaupun component yang sama tetapi akan terisolasi antar statenya -->
-    <Counter />
-    <Counter />
+    <Counter name="joko" />
+    <Counter name="joni" />
   </div>
 </template>

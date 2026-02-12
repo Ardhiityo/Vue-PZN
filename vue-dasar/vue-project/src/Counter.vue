@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from "vue";
+import { ref, nextTick, defineProps } from "vue";
 
 // Simple Reactive State
 // const count = ref(0);
@@ -31,11 +31,13 @@ async function increment() {
   //memastikan kode berjalan setelah terupdate.
   console.log(counter.value.count); //3
 }
+
+const props = defineProps(["name"]);
 </script>
 
 <template>
   <!-- Reactive State -->
-  <h1>Counter {{ counter.name }} : {{ counter.count }}</h1>
+  <h1>Counter {{ props.name }} : {{ counter.count }}</h1>
 
   <!-- Cara 1 -->
   <!-- <button @click="increment">Tambah</button> -->
