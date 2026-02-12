@@ -36,7 +36,9 @@ function changeLastName() {
 </script>
 
 <template>
-  <button @click="increment">Counter {{ counter }}</button>
+  <!-- Inline statement -->
+  <button @click="counter++">Counter {{ counter }}</button>
+
   <div>
     <label for="first_name">First Name</label>
     <input type="text" id="first_name" @input="changeFirstName" />
