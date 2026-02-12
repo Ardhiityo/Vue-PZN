@@ -25,17 +25,25 @@ function increment() {
   console.log(counter.value);
   counter.value++;
 }
+
+function changeFirstName() {
+  person.first_name = document.getElementById("first_name").value;
+}
+
+function changeLastName() {
+  person.last_name = document.getElementById("last_name").value;
+}
 </script>
 
 <template>
   <button @click="increment">Counter {{ counter }}</button>
   <div>
     <label for="first_name">First Name</label>
-    <input type="text" id="first_name" />
+    <input type="text" id="first_name" @input="changeFirstName" />
   </div>
   <div>
     <label for="last_name">Last Name</label>
-    <input type="text" id="last_name" />
+    <input type="text" id="last_name" v-on:input="changeLastName" />
   </div>
   <button @click="greet">Say Hello</button>
   <h1>Hello {{ fullname }}</h1>
