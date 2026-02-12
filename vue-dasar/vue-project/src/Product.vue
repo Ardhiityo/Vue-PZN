@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, watchEffect } from "vue";
+import { onWatcherCleanup, ref, watch, watchEffect } from "vue";
 
 const product_id = ref("product1");
 const product = ref(null);
@@ -22,6 +22,11 @@ const product = ref(null);
 //watchEffect akan dijalankan segera ketika component di-mount (immediate = true secara default)
 //akan otomatis track state yang ada di dalam watchEffect
 watchEffect(async () => {
+  //untuk membersihkan state ketika sebelum terjadi perubahan
+  onWatcherCleanup(() => {
+    console.log("Cleanup");
+  });
+
   console.log("watchEffect called");
   if (product_id.value) {
     const response = await fetch(`/${product_id.value}.json`);
