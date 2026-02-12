@@ -7,8 +7,8 @@ import CounterStateless from "./CounterStateless.vue";
 const count = ref(0);
 
 //Mengirim event ke child dengan emit
-const increment = () => {
-  count.value++;
+const increment = (value) => {
+  count.value += value;
 };
 </script>
 
@@ -21,14 +21,21 @@ const increment = () => {
     <Counter name="joni" initial-count="20" />
 
     <!-- Emit cara 1 -->
-    <CounterStateless name="andre" :count="count" @increment="increment" />
+    <CounterStateless
+      name="andre"
+      :count="count"
+      :increment="1"
+      @increment="increment"
+    />
 
     <!-- Emit cara 2 -->
     <CounterStateless
       name="andra"
       :count="count"
-      @increment="() => (count += 2)"
+      :increment="2"
+      @increment="increment"
     />
+
     <button @click="increment">Increment</button>
   </div>
 </template>
