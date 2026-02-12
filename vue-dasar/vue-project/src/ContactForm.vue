@@ -1,7 +1,10 @@
 <script setup>
 import { defineModel } from "vue";
 
-const form = defineModel();
+const form = defineModel({
+  type: Object,
+  required: true,
+});
 </script>
 
 <template>
