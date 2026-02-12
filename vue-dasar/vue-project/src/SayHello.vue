@@ -26,12 +26,14 @@ function increment() {
   counter.value++;
 }
 
-function changeFirstName() {
-  person.first_name = document.getElementById("first_name").value;
+function changeFirstName(event) {
+  console.log(event);
+  person.first_name = event.target.value;
 }
 
-function changeLastName() {
-  person.last_name = document.getElementById("last_name").value;
+function changeLastName(event) {
+  console.log(event);
+  person.last_name = event.target.value;
 }
 </script>
 
