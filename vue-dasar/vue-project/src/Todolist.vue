@@ -5,14 +5,17 @@ const todos = [
   {
     id: 1,
     task: "Makan",
+    done: true,
   },
   {
     id: 2,
     task: "Minum",
+    done: false,
   },
   {
     id: 3,
     task: "Belajar",
+    done: false,
   },
 ];
 </script>
@@ -36,4 +39,11 @@ const todos = [
   <ul>
     <li v-for="n in 10" :key="n">Hello, {{ n }}</li>
   </ul>
+
+  <!-- v-for & v-if -->
+  <template v-for="(todo, index) in todos" :key="index">
+    <ul v-if="!todo.done" :key="todo.id">
+      <li v-for="(value, key) in todo" :key="key">{{ key }} : {{ value }}</li>
+    </ul>
+  </template>
 </template>
