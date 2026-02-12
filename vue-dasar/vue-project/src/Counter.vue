@@ -7,10 +7,12 @@ import { ref, nextTick, defineProps } from "vue";
 //   count.value++;
 // }
 
+const props = defineProps(["name", "initialCount"]);
+
 // Object Reactive State
 const counter = ref({
   name: "Budi",
-  count: 0,
+  count: props.initialCount,
 });
 
 async function increment() {
@@ -31,8 +33,6 @@ async function increment() {
   //memastikan kode berjalan setelah terupdate.
   console.log(counter.value.count); //3
 }
-
-const props = defineProps(["name"]);
 </script>
 
 <template>
