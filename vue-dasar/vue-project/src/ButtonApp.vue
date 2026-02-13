@@ -13,7 +13,8 @@ function clickHandler() {
   <MyButton class="btn" @click="clickHandler" name="Eko" contoh="ini contoh" />
 
   <Container title="Judul Container">
-    <p>Ini adalah konten dari container</p>
+    <!-- Jika tidak ada konten yang dimasukkan, maka akan menampilkan konten default dari slot -->
+    <!-- <p>Ini adalah konten dari container</p> -->
   </Container>
 </template>
 

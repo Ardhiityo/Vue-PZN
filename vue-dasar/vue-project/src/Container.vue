@@ -6,5 +6,5 @@ const props = defineProps(["title"]);
 
 <template>
   <h1>{{ props.title }}</h1>
-  <slot />
+  <slot> Anda belum memasukkan konten </slot>
 </template>
