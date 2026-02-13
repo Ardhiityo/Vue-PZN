@@ -12,9 +12,22 @@ function clickHandler() {
   <!-- Fallthrough Attributes merupakan attribute atau event listener yang diteruskan oleh Component, tapi tidak secara explicit dideklarasikan menggunakan Props defineProps() atau Event defineEmits(). Contoh misal nya attribute class, style dan id -->
   <MyButton class="btn" @click="clickHandler" name="Eko" contoh="ini contoh" />
 
-  <Container title="Judul Container">
+  <Container>
     <!-- Jika tidak ada konten yang dimasukkan, maka akan menampilkan konten default dari slot -->
-    <!-- <p>Ini adalah konten dari container</p> -->
+
+    <!-- Cara 1 dengan # -->
+    <template #header>
+      <h1>Ini adalah header</h1>
+    </template>
+
+    <!-- Cara 2 dengan v-slot -->
+    <template v-slot:body>
+      <p>Ini adalah body</p>
+    </template>
+
+    <template #footer>
+      <p>Ini adalah footer</p>
+    </template>
   </Container>
 </template>
 
