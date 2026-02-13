@@ -18,7 +18,7 @@ const form = reactive({
 
   <ContactForm v-model="form" />
   <ContactList
-    v-model:name="form.name"
+    v-model:name.uppercase="form.name"
     v-model:email="form.email"
     v-model:age="form.age"
     v-model:type="form.type"
