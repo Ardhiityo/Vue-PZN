@@ -25,7 +25,7 @@ const increment = (value) => {
       name="andre"
       :count="count"
       :increment="1"
-      @increment="increment"
+      v-on:increment="increment"
     />
 
     <!-- Emit cara 2 -->
@@ -35,7 +35,5 @@ const increment = (value) => {
       :increment="2"
       @increment="increment"
     />
-
-    <button @click="increment">Increment</button>
   </div>
 </template>
