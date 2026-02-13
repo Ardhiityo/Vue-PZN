@@ -1,4 +1,8 @@
 <script setup>
+defineOptions({
+  // Menonaktifkan Fallthrough Attributes
+  inheritAttrs: false,
+});
 </script>
 
 <template>
