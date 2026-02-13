@@ -16,13 +16,14 @@ function clickHandler() {
     <!-- Jika tidak ada konten yang dimasukkan, maka akan menampilkan konten default dari slot -->
 
     <!-- Cara 1 dengan # -->
-    <template #header>
-      <h1>Ini adalah header</h1>
+    <!-- attribute digunakan untuk menerima data dari component slot Container (parent) ke component ButtonApp (child) -->
+    <template #header="attribute">
+      <h1>Ini adalah header {{ attribute.count }}</h1>
     </template>
 
     <!-- Cara 2 dengan v-slot -->
-    <template v-slot:body>
-      <p>Ini adalah body</p>
+    <template v-slot:body="attribute">
+      <p>Ini adalah body {{ attribute.count }}</p>
     </template>
 
     <!-- Tidak akan ditampilkan karena tidak ada v-if di component Container dengan name slot footer -->
