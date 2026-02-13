@@ -25,9 +25,10 @@ function clickHandler() {
       <p>Ini adalah body</p>
     </template>
 
-    <template #footer>
+    <!-- Tidak akan ditampilkan karena tidak ada v-if di component Container dengan name slot footer -->
+    <!-- <template #footer>
       <p>Ini adalah footer</p>
-    </template>
+    </template> -->
   </Container>
 </template>
 
