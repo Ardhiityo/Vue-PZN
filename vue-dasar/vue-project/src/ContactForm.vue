@@ -4,6 +4,10 @@ import { defineModel } from "vue";
 const form = defineModel({
   type: Object,
   required: true,
+  get: (value) => {
+    value.email = value.email.toUpperCase();
+    return value;
+  },
 });
 </script>
 
