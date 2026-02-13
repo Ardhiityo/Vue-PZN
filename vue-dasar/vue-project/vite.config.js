@@ -30,6 +30,7 @@ export default defineConfig({
         'note': 'note.html',
         'button-app': 'button-app.html',
         'home': 'home.html',
+        'profile-app': 'profile-app.html',
       },
     },
   },
