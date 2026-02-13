@@ -29,6 +29,7 @@ export default defineConfig({
         'product': 'product.html',
         'note': 'note.html',
         'button-app': 'button-app.html',
+        'home': 'home.html',
       },
     },
   },
