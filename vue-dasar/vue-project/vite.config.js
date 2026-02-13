@@ -28,6 +28,7 @@ export default defineConfig({
         'contact': 'contact.html',
         'product': 'product.html',
         'note': 'note.html',
+        'button-app': 'button-app.html',
       },
     },
   },
