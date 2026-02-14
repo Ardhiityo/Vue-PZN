@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from './components/Home.vue'
 import About from './components/About.vue'
+import ProductDetail from './components/ProductDetail.vue'
 
 const router = createRouter({
     routes: [
@@ -17,6 +18,11 @@ const router = createRouter({
             path: '/about',
             name: 'About',
             component: About
+        },
+        {
+            path: '/products/:id',
+            name: 'ProductDetail',
+            component: ProductDetail
         }
     ],
     history: createWebHistory()
