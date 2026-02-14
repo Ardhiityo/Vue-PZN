@@ -6,6 +6,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
 import ProductDetail from './components/ProductDetail.vue'
+import ProductSearch from './components/ProductSearch.vue'
 import NotFound from './components/NotFound.vue'
 
 const router = createRouter({
@@ -27,6 +28,11 @@ const router = createRouter({
             path: '/products/:id(\\d+)?',
             name: 'ProductDetail',
             component: ProductDetail
+        },
+        {
+            path: '/products/search',
+            name: 'ProductSearch',
+            component: ProductSearch
         },
         {
             path: '/:notfound*',

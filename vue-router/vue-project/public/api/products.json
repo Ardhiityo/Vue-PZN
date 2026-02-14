@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "name": "Samsung Galaxy S21",
+        "price": 100
+    },
+    {
+        "id": 2,
+        "name": "Iphone 15 Pro Max",
+        "price": 200
+    },
+    {
+        "id": 3,
+        "name": "Xiaomi 14 Pro",
+        "price": 300
+    },
+    {
+        "id": 4,
+        "name": "Realme 12 Pro",
+        "price": 400
+    },
+    {
+        "id": 5,
+        "name": "Oppo Reno 12 Pro",
+        "price": 500
+    },
+    {
+        "id": 6,
+        "name": "Vivo X100 Pro",
+        "price": 600
+    },
+    {
+        "id": 7,
+        "name": "OnePlus 12 Pro",
+        "price": 700
+    },
+    {
+        "id": 8,
+        "name": "Asus ROG Phone 8 Pro",
+        "price": 800
+    },
+    {
+        "id": 9,
+        "name": "Sony Xperia 1 V",
+        "price": 900
+    },
+    {
+        "id": 10,
+        "name": "Motorola Edge 50 Pro",
+        "price": 1000
+    }
+]
