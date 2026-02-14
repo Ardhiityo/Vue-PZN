@@ -18,3 +18,10 @@
   <RouterView />
   <p>This is the users footer</p>
 </template>
+
+<style scoped>
+.router-link-exact-active {
+  color: red;
+  font-weight: bold;
+}
+</style>
