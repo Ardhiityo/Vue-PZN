@@ -10,7 +10,14 @@ const router = useRouter();
 const query = ref(route.query.product || "");
 
 watchEffect(() => {
-  router.push({
+  // push : menambah history setiap kali di panggil (banyak history)
+  // router.push({
+  //   query: {
+  //     product: query.value,
+  //   },
+  // });
+  // replace : mengganti history setiap kali di panggil (satu history)
+  router.replace({
     query: {
       product: query.value,
     },
