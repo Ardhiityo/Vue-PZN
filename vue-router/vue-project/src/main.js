@@ -22,7 +22,9 @@ const router = createRouter({
             sensitive: true
         },
         {
-            path: '/products/:id(\\d+)', // only numbers
+            // (\\d+) : only numbers
+            // ? : Optional param
+            path: '/products/:id(\\d+)?',
             name: 'ProductDetail',
             component: ProductDetail
         },
