@@ -6,6 +6,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
 import ProductDetail from './components/ProductDetail.vue'
+import NotFound from './components/NotFound.vue'
 
 const router = createRouter({
     routes: [
@@ -23,6 +24,11 @@ const router = createRouter({
             path: '/products/:id(\\d+)', // only numbers
             name: 'ProductDetail',
             component: ProductDetail
+        },
+        {
+            path: '/:notfound*',
+            name: 'NotFound',
+            component: NotFound
         }
     ],
     history: createWebHistory()
