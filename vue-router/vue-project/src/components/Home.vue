@@ -12,4 +12,5 @@ const { title } = defineProps({
   <p>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
   </p>
+  <RouterLink :to="{ name: 'user-profile' }">User</RouterLink>
 </template>
