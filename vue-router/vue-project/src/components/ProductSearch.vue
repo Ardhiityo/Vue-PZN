@@ -18,6 +18,7 @@ watchEffect(() => {
   // });
   // replace : mengganti history setiap kali di panggil (satu history)
   router.replace({
+    name: "product-search",
     query: {
       product: query.value,
     },

@@ -6,13 +6,13 @@
   <p>This is the users header</p>
   <ul>
     <li>
-      <RouterLink to="/users">Profile</RouterLink>
+      <RouterLink :to="{ name: 'user-profile' }">Profile</RouterLink>
     </li>
     <li>
-      <RouterLink to="/users/order">Order</RouterLink>
+      <RouterLink :to="{ name: 'user-order' }">Order</RouterLink>
     </li>
     <li>
-      <RouterLink to="/users/wishlist">Wishlist</RouterLink>
+      <RouterLink :to="{ name: 'user-wishlist' }">Wishlist</RouterLink>
     </li>
   </ul>
   <RouterView />

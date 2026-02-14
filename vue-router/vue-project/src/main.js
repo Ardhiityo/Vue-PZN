@@ -17,12 +17,12 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'Home',
+            name: 'home',
             component: Home
         },
         {
             path: '/about',
-            name: 'About',
+            name: 'about',
             component: About,
             sensitive: true
         },
@@ -30,39 +30,39 @@ const router = createRouter({
             // (\\d+) : only numbers
             // ? : Optional param
             path: '/products/:id(\\d+)?',
-            name: 'ProductDetail',
+            name: 'product-detail',
             component: ProductDetail
         },
         {
             path: '/products/search',
-            name: 'ProductSearch',
+            name: 'product-search',
             component: ProductSearch
         },
         {
             path: '/users',
-            name: 'User',
+            name: 'user',
             component: User,
             children: [
                 {
                     path: '',
-                    name: 'UserProfile',
+                    name: 'user-profile',
                     component: UserProfile
                 },
                 {
                     path: 'order',
-                    name: 'UserOrder',
+                    name: 'user-order',
                     component: UserOrder
                 },
                 {
                     path: 'wishlist',
-                    name: 'UserWishlist',
+                    name: 'user-wishlist',
                     component: UserWishlist
                 },
             ]
         },
         {
             path: '/:notfound*',
-            name: 'NotFound',
+            name: 'not-found',
             component: NotFound
         },
     ],
