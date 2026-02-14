@@ -1,7 +1,7 @@
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory, createMemoryHistory } from 'vue-router'
 
 import Home from './components/Home.vue'
 import About from './components/About.vue'
@@ -113,6 +113,18 @@ const router = createRouter({
             component: NotFound
         },
     ],
+    /**
+     History Mode 1: createWebHistory() -> http://localhost:5173/products/search?product=sony
+     Note: Tidak ada tanda # di url
+     
+     History Mode 2: createWebHashHistory() -> http://localhost:5173/#/products/search?product=sony 
+     Note: Selalu ada tanda # di url
+     
+     History Mode 3: createMemoryHistory() -> http://localhost:5173
+     Note: Tidak bisa diakses melalui url, hanya bisa diakses melalui link di dalam aplikasi
+     */
+    // history: createWebHashHistory()
+    // history: createMemoryHistory()
     history: createWebHistory()
 })
 
