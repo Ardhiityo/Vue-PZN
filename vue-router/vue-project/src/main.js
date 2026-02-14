@@ -20,7 +20,7 @@ const router = createRouter({
             component: About
         },
         {
-            path: '/products/:id',
+            path: '/products/:id(\\d+)', // only numbers
             name: 'ProductDetail',
             component: ProductDetail
         }
