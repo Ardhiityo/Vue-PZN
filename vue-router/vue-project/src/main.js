@@ -18,7 +18,8 @@ const router = createRouter({
         {
             path: '/about',
             name: 'About',
-            component: About
+            component: About,
+            sensitive: true
         },
         {
             path: '/products/:id(\\d+)', // only numbers
