@@ -27,6 +27,15 @@ const router = createRouter({
             component: Home
         },
         {
+            path: '/home',
+            redirect: {
+                // Cara 1: Redirect by name
+                name: 'home'
+                // Cara 2: Redirect by path
+                // path: '/'
+            }
+        },
+        {
             path: '/about',
             name: 'about',
             component: About,
@@ -43,6 +52,17 @@ const router = createRouter({
             path: '/products/search',
             name: 'product-search',
             component: ProductSearch
+        },
+        {
+            path: '/products/search/:product',
+            redirect: route => {
+                return {
+                    name: 'product-search',
+                    query: {
+                        product: route.params.product
+                    }
+                }
+            }
         },
         {
             path: '/users',
