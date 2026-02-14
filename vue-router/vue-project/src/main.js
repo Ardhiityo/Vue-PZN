@@ -12,6 +12,12 @@ import UserProfile from './components/UserProfile.vue'
 import UserOrder from './components/UserOrder.vue'
 import UserWishlist from './components/UserWishlist.vue'
 import NotFound from './components/NotFound.vue'
+import UserHeader from './components/UserHeader.vue'
+import UserFooter from './components/UserFooter.vue'
+import UserOrderHeader from './components/UserOrderHeader.vue'
+import UserOrderFooter from './components/UserOrderFooter.vue'
+import UserWishlistHeader from './components/UserWishlistHeader.vue'
+import UserWishlistFooter from './components/UserWishlistFooter.vue'
 
 const router = createRouter({
     routes: [
@@ -46,17 +52,29 @@ const router = createRouter({
                 {
                     path: '',
                     name: 'user-profile',
-                    component: UserProfile
+                    components: {
+                        default: UserProfile,
+                        header: UserHeader,
+                        footer: UserFooter
+                    }
                 },
                 {
                     path: 'order',
                     name: 'user-order',
-                    component: UserOrder
+                    components: {
+                        default: UserOrder,
+                        header: UserOrderHeader,
+                        footer: UserOrderFooter
+                    }
                 },
                 {
                     path: 'wishlist',
                     name: 'user-wishlist',
-                    component: UserWishlist
+                    components: {
+                        default: UserWishlist,
+                        header: UserWishlistHeader,
+                        footer: UserWishlistFooter
+                    }
                 },
             ]
         },

@@ -3,25 +3,9 @@
 
 <template>
   <h1>Users</h1>
-  <p>This is the users header</p>
-  <ul>
-    <li>
-      <RouterLink :to="{ name: 'user-profile' }">Profile</RouterLink>
-    </li>
-    <li>
-      <RouterLink :to="{ name: 'user-order' }">Order</RouterLink>
-    </li>
-    <li>
-      <RouterLink :to="{ name: 'user-wishlist' }">Wishlist</RouterLink>
-    </li>
-  </ul>
+  <RouterView name="header" />
+  <!-- Jika tidak memiliki name maka akan menggunakan default -->
   <RouterView />
-  <p>This is the users footer</p>
+  <RouterView name="footer" />
 </template>
 
-<style scoped>
-.router-link-exact-active {
-  color: red;
-  font-weight: bold;
-}
-</style>
