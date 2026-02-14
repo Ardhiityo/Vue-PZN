@@ -56,7 +56,11 @@ const router = createRouter({
         {
             path: '/products/search',
             name: 'product-search',
-            component: ProductSearch
+            component: ProductSearch,
+            // Mengubah query menjadi props ke component
+            props: route => ({
+                product: route.query.product
+            })
         },
         {
             path: '/products/search/:product',

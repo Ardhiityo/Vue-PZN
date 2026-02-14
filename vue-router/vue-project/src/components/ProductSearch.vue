@@ -1,13 +1,15 @@
 <script setup>
-import { ref, watchEffect } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { ref, watchEffect, defineProps } from "vue";
+import { useRouter } from "vue-router";
 
-const route = useRoute();
 const products = ref([]);
 const router = useRouter();
 
+// Props dikirim dari router (main.js)
+const { product } = defineProps(["product"]);
+
 // http://localhost:5173/products/search?product=sony
-const query = ref(route.query.product || "");
+const query = ref(product || "");
 
 watchEffect(() => {
   // push : menambah history setiap kali di panggil (banyak history)
