@@ -49,7 +49,9 @@ const router = createRouter({
             // ? : Optional param
             path: '/products/:id(\\d+)?',
             name: 'product-detail',
-            component: ProductDetail
+            component: ProductDetail,
+            // Mengubah parameter menjadi props ke component
+            props: true
         },
         {
             path: '/products/search',

@@ -1,16 +1,21 @@
 <script setup>
-import { useRoute } from "vue-router";
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, defineProps } from "vue";
 
-const route = useRoute();
+// Props dikirim dari router (main.js)
+const { id } = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+});
 
 const product = ref(null);
 const loaded = ref(false);
 const error = ref(false);
 
 watchEffect(() => {
-  if (route.params.id) {
-    fetch(`/api/products/${route.params.id}.json`)
+  if (id) {
+    fetch(`/api/products/${id}.json`)
       .then((response) => response.json())
       .then((data) => {
         product.value = data;
@@ -24,17 +29,17 @@ watchEffect(() => {
 </script>
 
 <template>
-  <template v-if="route.params.id">
+  <template v-if="id">
     <div v-if="loaded">
       <h1>Product Detail {{ product.id }}</h1>
       <p>Product Name: {{ product.name }}</p>
       <p>Product Price: {{ product.price }}</p>
     </div>
     <div v-else-if="error">
-      <h1>Error loading product {{ route.params.id }}</h1>
+      <h1>Error loading product {{ id }}</h1>
     </div>
     <div v-else>
-      <h1>Loading product {{ route.params.id }}</h1>
+      <h1>Loading product {{ id }}</h1>
     </div>
   </template>
   <template v-else>
