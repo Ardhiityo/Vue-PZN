@@ -7,6 +7,10 @@ function handleClick() {
   counterStore.counter++;
 }
 
+counterStore.$subscribe((mutation, state) => {
+  console.log(mutation, state);
+});
+
 function handleReset() {
   counterStore.$patch({
     counter: 0,
