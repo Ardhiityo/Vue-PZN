@@ -10,10 +10,15 @@ counterStore.$subscribe((mutation, state) => {
 counterStore.$onAction((action, state) => {
   console.log(action, state);
 });
+
+function logDoubled() {
+  console.log(counterStore.doubled);
+}
 </script>
 
 <template>
   <h1>Counter {{ counterStore.counter }}</h1>
   <button @click="counterStore.increment">Count</button>
   <button @click="counterStore.reset">Reset</button>
+  <button @click="logDoubled">Log Doubled</button>
 </template>
