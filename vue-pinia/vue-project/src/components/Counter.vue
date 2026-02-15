@@ -6,6 +6,10 @@ const counterStore = useCounter();
 counterStore.$subscribe((mutation, state) => {
   console.log(mutation, state);
 });
+
+counterStore.$onAction((action, state) => {
+  console.log(action, state);
+});
 </script>
 
 <template>
