@@ -10,7 +10,7 @@ const router = createRouter({
         {
             path: '/counter',
             name: 'counter',
-            component: () => import('./components/Counter.vue')
+            component: () => import('./components/MultipleCounter.vue')
         }
     ],
     history: createWebHistory()
