@@ -94,7 +94,12 @@ const router = createRouter({
         {
             path: '/:notfound*',
             name: 'not-found',
-            component: () => import('./components/NotFound.vue')
+            component: () => import('./components/NotFound.vue'),
+            // Guard per route
+            beforeEnter: (to, from, next) => {
+                console.log(`Before enter: from ${from.fullPath} to ${to.fullPath}`);
+                next();
+            }
         },
     ],
     /**
@@ -110,6 +115,17 @@ const router = createRouter({
     // history: createWebHashHistory()
     // history: createMemoryHistory()
     history: createWebHistory()
+})
+
+// untuk melakukan kode sebelum navigasi (global)
+router.beforeEach((to, from, next) => {
+    console.log(`Before each: from ${from.fullPath} to ${to.fullPath}`);
+    next();
+})
+
+// untuk melakukan kode setelah navigasi (global)
+router.afterEach((to, from) => {
+    console.log(`After each: from ${from.fullPath} to ${to.fullPath}`);
 })
 
 createApp(App).use(router).mount('#app')
