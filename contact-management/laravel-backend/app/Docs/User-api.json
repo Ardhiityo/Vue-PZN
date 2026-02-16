@@ -4,7 +4,11 @@
         "title": "User Api",
         "version": "1.0"
     },
-    "servers": [{ "url": "https://api.server.test/v1" }],
+    "servers": [
+        {
+            "url": "https://api.server.test/v1"
+        }
+    ],
     "paths": {
         "/api/users": {
             "post": {
@@ -15,7 +19,11 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": ["username", "name", "password"],
+                                "required": [
+                                    "username",
+                                    "name",
+                                    "password"
+                                ],
                                 "properties": {
                                     "username": {
                                         "type": "string"
@@ -25,6 +33,9 @@
                                     },
                                     "password": {
                                         "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
                                     }
                                 }
                             },
@@ -33,7 +44,8 @@
                                     "value": {
                                         "username": "johndoe",
                                         "name": "John Doe",
-                                        "password": "password123"
+                                        "password": "password123",
+                                        "password_confirmation": "password123"
                                     }
                                 }
                             }
@@ -51,11 +63,15 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "id": { "type": "integer" },
+                                                "id": {
+                                                    "type": "integer"
+                                                },
                                                 "username": {
                                                     "type": "string"
                                                 },
-                                                "name": { "type": "string" }
+                                                "name": {
+                                                    "type": "string"
+                                                }
                                             }
                                         },
                                         "errors": {
@@ -134,7 +150,10 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": ["username", "password"],
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
                                 "properties": {
                                     "username": {
                                         "type": "string"
@@ -166,7 +185,9 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "id": { "type": "integer" },
+                                                "id": {
+                                                    "type": "integer"
+                                                },
                                                 "token": {
                                                     "type": "string"
                                                 },
@@ -349,7 +370,9 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "id": { "type": "integer" },
+                                                "id": {
+                                                    "type": "integer"
+                                                },
                                                 "token": {
                                                     "type": "string"
                                                 },

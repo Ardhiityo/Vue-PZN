@@ -20,6 +20,8 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
+        unset($data['password_confirmation']);
+
         $data['username'] = Str::slug($data['username']);
 
         $user = User::create($data);
