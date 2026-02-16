@@ -3,7 +3,6 @@ import { reactive } from "vue";
 import { userRegister } from "@/lib/api/UserApi";
 import { success } from "@/alert";
 import { useRouter } from "vue-router";
-import Auth from "@/components/layouts/Auth.vue";
 
 const user = reactive({
   username: "",
@@ -40,7 +39,14 @@ async function handleRegister() {
 </script>
 
 <template>
-  <Auth title="Sign in to your account">
+  <section>
+    <div class="text-center mb-8">
+      <div class="inline-block p-3 bg-gradient rounded-full mb-4">
+        <i class="fas fa-user-plus text-3xl text-white"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-white">Contact Management</h1>
+      <p class="text-gray-300 mt-2">Create a new account</p>
+    </div>
     <form @submit.prevent="handleRegister">
       <div class="mb-4">
         <label
@@ -157,13 +163,13 @@ async function handleRegister() {
       <div class="text-center text-sm text-gray-400">
         Already have an account?
         <RouterLink
-          :to="{ name: 'login' }"
+          :to="{ name: 'auth.login' }"
           class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
           >Sign in
         </RouterLink>
       </div>
     </form>
-  </Auth>
+  </section>
 </template>
 
 <style scoped>

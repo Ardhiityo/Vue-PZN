@@ -57,6 +57,8 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
+        unset($data['password_confirmation']);
+
         $user = Auth::user();
 
         $data['password'] = isset($data['password']) ? Hash::make($data['password']) :  $user->username;

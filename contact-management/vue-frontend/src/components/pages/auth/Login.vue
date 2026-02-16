@@ -3,7 +3,6 @@ import { reactive } from "vue";
 import { userLogin } from "@/lib/api/UserApi";
 import { success } from "@/alert";
 import { useRouter } from "vue-router";
-import Auth from "@/components/layouts/Auth.vue";
 import { useLocalStorage } from "@vueuse/core";
 
 const user = reactive({
@@ -35,7 +34,14 @@ async function handleLogin() {
 </script>
 
 <template>
-  <Auth title="Sign in to your account">
+  <section>
+    <div class="text-center mb-8">
+      <div class="inline-block p-3 bg-gradient rounded-full mb-4">
+        <i class="fas fa-user-plus text-3xl text-white"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-white">Contact Management</h1>
+      <p class="text-gray-300 mt-2">Sign in to your account</p>
+    </div>
     <form @submit.prevent="handleLogin">
       <div class="mb-5">
         <label
@@ -58,10 +64,10 @@ async function handleLogin() {
             required
             v-model="user.username"
           />
-          <p v-if="errors.username" class="text-red-500 text-sm font-bold">
-            {{ errors.username }}
-          </p>
         </div>
+        <p v-if="errors.username" class="text-red-500 text-sm font-bold">
+          {{ errors.username }}
+        </p>
       </div>
 
       <div class="mb-6">
@@ -100,13 +106,13 @@ async function handleLogin() {
       <div class="text-center text-sm text-gray-400">
         Don't have an account?
         <RouterLink
-          :to="{ name: 'register' }"
+          :to="{ name: 'auth.register' }"
           class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
           >Sign up
         </RouterLink>
       </div>
     </form>
-  </Auth>
+  </section>
 </template>
 
 <style scoped>

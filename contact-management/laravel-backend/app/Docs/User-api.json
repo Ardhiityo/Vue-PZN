@@ -345,6 +345,9 @@
                                     },
                                     "password": {
                                         "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
                                     }
                                 }
                             },
@@ -352,7 +355,8 @@
                                 "John Doe": {
                                     "value": {
                                         "name": "John Updated",
-                                        "password": "newpassword123"
+                                        "password": "newpassword123",
+                                        "password_confirmation": "newpassword123"
                                     }
                                 }
                             }
@@ -399,6 +403,41 @@
                                                 "name": "John Doe"
                                             },
                                             "errors": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "array"
+                                                },
+                                                "password": {
+                                                    "type": "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "Validation error": {
+                                        "value": {
+                                            "name": [
+                                                "The name field min 8 characters."
+                                            ],
+                                            "password": [
+                                                "The password field min 8 characters."
+                                            ]
                                         }
                                     }
                                 }
