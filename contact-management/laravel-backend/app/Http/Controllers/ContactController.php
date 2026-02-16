@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ContactResource;
 use App\Http\Requests\ContactCreateRequest;
@@ -49,7 +48,7 @@ class ContactController extends Controller
             $phone = $request->query('phone');
             $email = $request->query('email');
             $contact = Contact::where('user_id', $user->id)
-                ->when($name,function ($query) use ($name) {
+                ->when($name, function ($query) use ($name) {
                     $query
                         ->whereLike('first_name', "%$name%")
                         ->orWhereLike('last_name', "%$name%");

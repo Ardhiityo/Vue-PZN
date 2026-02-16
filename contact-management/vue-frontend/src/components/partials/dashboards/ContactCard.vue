@@ -7,7 +7,10 @@
     <div
       class="bg-gray-800 bg-opacity-80 rounded-xl shadow-custom overflow-hidden border-2 border-dashed border-gray-700 card-hover animate-fade-in"
     >
-      <a href="create_contact.html" class="block p-6 h-full">
+      <RouterLink
+        :to="{ name: 'dashboard.contact.create' }"
+        class="block p-6 h-full"
+      >
         <div
           class="flex flex-col items-center justify-center h-full text-center"
         >
@@ -21,7 +24,7 @@
           </h2>
           <p class="text-gray-300">Add a new contact to your list</p>
         </div>
-      </a>
+      </RouterLink>
     </div>
 
     <!-- Contact Card 1 -->

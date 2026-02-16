@@ -24,6 +24,8 @@ async function handleRegister() {
   const responseBody = await response.json();
 
   if (response.status === 201) {
+    resetInput();
+    resetErrorBag();
     router.push({ name: "auth.login" });
     success("Yeay, your account has been created!");
   } else {
@@ -35,6 +37,19 @@ async function handleRegister() {
       ? responseBody.password[0]
       : null;
   }
+}
+
+function resetErrorBag() {
+  errors.name = null;
+  errors.username = null;
+  errors.password = null;
+}
+
+function resetInput() {
+  user.username = "";
+  user.name = "";
+  user.password = "";
+  user.password_confirmation = "";
 }
 </script>
 

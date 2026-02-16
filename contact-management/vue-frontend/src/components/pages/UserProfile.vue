@@ -45,14 +45,25 @@ async function handleUpdatePassword() {
   const response = await userUpdatePassword(user);
   const responseBody = await response.json();
   if (response.status === 200) {
-    user.password = "";
-    user.password_confirmation = "";
+    resetInput();
+    resetErrorBag();
     success("Yeay, your password updated successfully!");
   } else {
     errors.password = responseBody.password.length
       ? responseBody.password[0]
       : null;
   }
+}
+
+function resetErrorBag() {
+  user.name = null;
+  user.password = null;
+}
+
+function resetInput() {
+  user.name = "";
+  user.password = "";
+  user.password_confirmation = "";
 }
 </script>
 

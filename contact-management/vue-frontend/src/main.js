@@ -39,6 +39,11 @@ const router = createRouter({
                     path: 'users/profile',
                     name: 'dashboard.profile',
                     component: () => import('./components/pages/UserProfile.vue')
+                },
+                {
+                    path: 'contacts/create',
+                    name: 'dashboard.contact.create',
+                    component: () => import('./components/pages/contacts/ContactCreate.vue')
                 }
             ]
         }

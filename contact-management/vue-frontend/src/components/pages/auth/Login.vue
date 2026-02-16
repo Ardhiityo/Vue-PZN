@@ -1,7 +1,6 @@
 <script setup>
 import { reactive } from "vue";
 import { userLogin } from "@/lib/api/UserApi";
-import { success } from "@/lib/alert";
 import { useRouter } from "vue-router";
 import { useLocalStorage } from "@vueuse/core";
 
@@ -15,21 +14,30 @@ const errors = reactive({
 });
 
 const router = useRouter();
-const token = useLocalStorage("token", "");
 
 async function handleLogin() {
   const response = await userLogin(user);
   const responseBody = await response.json();
 
   if (response.status === 200) {
-    token.value = responseBody.data.token;
+    resetInput();
+    resetErrorBag();
+    useLocalStorage("token", "").value = responseBody.data.token;
     router.push({ name: "dashboard" });
-    success("Login successfully!");
   } else {
     errors.username = responseBody?.username?.length
       ? responseBody.username[0]
       : null;
   }
+}
+
+function resetErrorBag() {
+  errors.username = null;
+}
+
+function resetInput() {
+  user.username = "";
+  user.password = "";
 }
 </script>
 
