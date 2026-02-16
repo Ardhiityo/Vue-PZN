@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import { userLogin } from "@/lib/api/UserApi";
-import { success } from "@/alert";
+import { success } from "@/lib/alert";
 import { useRouter } from "vue-router";
 import { useLocalStorage } from "@vueuse/core";
 
@@ -26,7 +26,7 @@ async function handleLogin() {
     router.push({ name: "dashboard" });
     success("Login successfully!");
   } else {
-    errors.username = responseBody.username.length
+    errors.username = responseBody?.username?.length
       ? responseBody.username[0]
       : null;
   }

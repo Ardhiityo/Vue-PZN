@@ -73,3 +73,14 @@ export const userUpdatePassword = async (user) => {
      }
     );   
 }
+
+export const userLogout = async () => {
+    return await fetch(`${import.meta.env.VITE_API_URL}/users/logout`, {
+        method: 'DELETE',
+        headers: {
+            "Accept": "application/json",
+            "Authorization": useLocalStorage('token', '').value,
+        }
+     }
+    );   
+}

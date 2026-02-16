@@ -6,7 +6,7 @@ import {
   userUpdateName,
   userUpdatePassword,
 } from "@/lib/api/UserApi";
-import { error, success } from "@/alert";
+import { error, success } from "@/lib/alert";
 
 const user = reactive({
   name: "",

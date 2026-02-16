@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import { userRegister } from "@/lib/api/UserApi";
-import { success } from "@/alert";
+import { success } from "@/lib/alert";
 import { useRouter } from "vue-router";
 
 const user = reactive({
@@ -23,15 +23,15 @@ async function handleRegister() {
   const response = await userRegister(user);
   const responseBody = await response.json();
 
-  if (response.status === 200) {
-    router.push({ name: "login" });
+  if (response.status === 201) {
+    router.push({ name: "auth.login" });
     success("Yeay, your account has been created!");
   } else {
-    errors.name = responseBody.name.length ? responseBody.name[0] : null;
-    errors.username = responseBody.username.length
+    errors.name = responseBody?.name?.length ? responseBody.name[0] : null;
+    errors.username = responseBody?.username?.length
       ? responseBody.username[0]
       : null;
-    errors.password = responseBody.password.length
+    errors.password = responseBody?.password?.length
       ? responseBody.password[0]
       : null;
   }
@@ -69,10 +69,10 @@ async function handleRegister() {
             required
             v-model="user.username"
           />
-          <p v-if="errors.username" class="text-red-500 text-sm font-bold">
-            {{ errors.username }}
-          </p>
         </div>
+        <p v-if="errors.username" class="text-red-500 text-sm font-bold">
+          {{ errors.username }}
+        </p>
       </div>
 
       <div class="mb-4">
@@ -94,10 +94,10 @@ async function handleRegister() {
             required
             v-model="user.name"
           />
-          <p v-if="errors.name" class="text-red-500 text-sm font-bold">
-            {{ errors.name }}
-          </p>
         </div>
+        <p v-if="errors.name" class="text-red-500 text-sm font-bold">
+          {{ errors.name }}
+        </p>
       </div>
 
       <div class="mb-4">
@@ -121,10 +121,10 @@ async function handleRegister() {
             required
             v-model="user.password"
           />
-          <p v-if="errors.password" class="text-red-500 text-sm font-bold">
-            {{ errors.password }}
-          </p>
         </div>
+        <p v-if="errors.password" class="text-red-500 text-sm font-bold">
+          {{ errors.password }}
+        </p>
       </div>
 
       <div class="mb-6">

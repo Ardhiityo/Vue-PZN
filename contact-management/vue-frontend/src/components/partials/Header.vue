@@ -23,13 +23,13 @@
             </RouterLink>
           </li>
           <li>
-            <a
-              href="index.html"
+            <RouterLink
+              :to="{ name: 'auth.logout' }"
               class="text-gray-100 hover:text-white flex items-center transition-colors duration-200"
             >
               <i class="fas fa-sign-out-alt mr-2"></i>
               <span>Logout</span>
-            </a>
+            </RouterLink>
           </li>
         </ul>
       </nav>
