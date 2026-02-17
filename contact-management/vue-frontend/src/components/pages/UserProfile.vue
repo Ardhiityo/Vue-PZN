@@ -93,8 +93,8 @@ function resetInput() {
               <label
                 for="name"
                 class="block text-gray-300 text-sm font-medium mb-2"
-                >Full Name</label
-              >
+                >Full Name
+              </label>
               <div class="relative">
                 <div
                   class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"

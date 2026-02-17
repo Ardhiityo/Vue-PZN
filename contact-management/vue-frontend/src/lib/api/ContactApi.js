@@ -17,3 +17,23 @@ export const createContact = async (contact) => {
      }
     );
 }
+
+export const fetchContact = async (queryParams) => {
+    
+    const url = new URL(`${import.meta.env.VITE_API_URL}/contacts`);
+    if(queryParams.name) url.searchParams.append('name', queryParams.name);
+    if(queryParams.email) url.searchParams.append('email', queryParams.email);
+    if (queryParams.phone) url.searchParams.append('phone', queryParams.phone);
+    if (queryParams.page) url.searchParams.append('page', queryParams.page);
+    
+    return await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization" : useLocalStorage('token', '').value
+        },
+     }
+    );
+}
+

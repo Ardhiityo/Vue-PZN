@@ -1,4 +1,41 @@
 <script setup>
+import { onMounted, defineModel, defineEmits } from "vue";
+
+defineEmits(["handleSearch"]);
+
+onMounted(() => {
+  const toggleButton = document.getElementById("toggleSearchForm");
+  const searchFormContent = document.getElementById("searchFormContent");
+  const toggleIcon = document.getElementById("toggleSearchIcon");
+
+  // Add transition for smooth animation
+  searchFormContent.style.transition =
+    "max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out";
+  searchFormContent.style.overflow = "hidden";
+  searchFormContent.style.maxHeight = "0px";
+  searchFormContent.style.opacity = "0";
+  searchFormContent.style.marginTop = "0";
+
+  toggleButton.addEventListener("click", function () {
+    if (searchFormContent.style.maxHeight !== "0px") {
+      // Hide the form
+      searchFormContent.style.maxHeight = "0px";
+      searchFormContent.style.opacity = "0";
+      searchFormContent.style.marginTop = "0";
+      toggleIcon.classList.remove("fa-chevron-up");
+      toggleIcon.classList.add("fa-chevron-down");
+    } else {
+      // Show the form
+      searchFormContent.style.maxHeight = searchFormContent.scrollHeight + "px";
+      searchFormContent.style.opacity = "1";
+      searchFormContent.style.marginTop = "1rem";
+      toggleIcon.classList.remove("fa-chevron-down");
+      toggleIcon.classList.add("fa-chevron-up");
+    }
+  });
+});
+
+const queryParams = defineModel();
 </script>
 
 <template>
@@ -19,7 +56,7 @@
       </button>
     </div>
     <div id="searchFormContent" class="mt-4">
-      <form>
+      <form @submit.prevent="$emit('handleSearch')">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div>
             <label
@@ -39,6 +76,7 @@
                 name="search_name"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Search by name"
+                v-model="queryParams.name"
               />
             </div>
           </div>
@@ -60,6 +98,7 @@
                 name="search_email"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Search by email"
+                v-model="queryParams.email"
               />
             </div>
           </div>
@@ -81,6 +120,7 @@
                 name="search_phone"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Search by phone"
+                v-model="queryParams.phone"
               />
             </div>
           </div>
