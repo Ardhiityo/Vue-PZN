@@ -3,9 +3,10 @@ import SearchContact from "../partials/dashboards/SearchContact.vue";
 import ContactCard from "../partials/dashboards/ContactCard.vue";
 import Pagination from "../partials/Pagination.vue";
 
-import { fetchContact } from "@/lib/api/ContactApi";
+import { fetchContact, deleteContact } from "@/lib/api/ContactApi";
 
 import { reactive, ref, onBeforeMount, watch } from "vue";
+import { error, success, confirm } from "@/lib/alert";
 
 const queryParams = reactive({
   name: "",
@@ -14,7 +15,7 @@ const queryParams = reactive({
   page: 1,
 });
 
-const meta = reactive({
+const pagination = reactive({
   currentPage: 1,
   lastPage: 1,
   pages: [],
@@ -24,8 +25,9 @@ const contacts = ref([]);
 
 onBeforeMount(async () => {
   await getContact();
-  for (let i = 1; i <= meta.lastPage; i++) {
-    meta.pages.push(i);
+  pagination.pages = [];
+  for (let i = 1; i <= pagination.lastPage; i++) {
+    pagination.pages.push(i);
   }
 });
 
@@ -35,9 +37,10 @@ async function getContact() {
 
   if (response.status === 200) {
     contacts.value = responseBody;
-    meta.lastPage = responseBody.meta.last_page;
-    console.log("start 1");
-    meta.currentPage = responseBody.meta.current_page;
+    pagination.lastPage = responseBody.meta.last_page;
+    pagination.currentPage = responseBody.meta.current_page;
+  } else {
+    error(responseBody.errors.token[0]);
   }
 }
 
@@ -62,11 +65,34 @@ function handleSearch() {
   getContact();
 }
 
+// Setiap kali data dihapus maka akan atur ulang pagination & fetchContact ulang
 watch(
-  // Akses reactive untuk watch perlu function, kecuali ref bisa langsung tanpa function
-  () => queryParams.page,
-  () => getContact()
+  () => pagination.lastPage,
+  async () => {
+    pagination.pages = [];
+    for (let i = 1; i <= pagination.lastPage; i++) {
+      pagination.pages.push(i);
+    }
+  }
 );
+
+// Setiap kali page berganti maka akan fethContact ulang
+watch(
+  () => queryParams.page,
+  async () => await getContact()
+);
+
+async function handleDelete(id) {
+  if (await confirm("You won't be able to revert this!")) {
+    const response = await deleteContact(Number(id));
+    if (response.status === 200) {
+      await getContact();
+      success("Contact has been deleted!");
+    } else {
+      error("Ups, something wrong!");
+    }
+  }
+}
 </script>
 
 <template>
@@ -76,9 +102,9 @@ watch(
       <h1 class="text-2xl font-bold text-white">My Contacts</h1>
     </div>
     <SearchContact v-model="queryParams" @handleSearch="handleSearch" />
-    <ContactCard :contacts="contacts" />
+    <ContactCard :contacts="contacts" @handleDelete="handleDelete" />
     <Pagination
-      v-model="meta"
+      v-model="pagination"
       @previousPage="previousPage"
       @setCurrentPage="setCurrentPage"
       @nextPage="nextPage"

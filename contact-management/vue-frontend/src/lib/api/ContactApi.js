@@ -37,3 +37,14 @@ export const fetchContact = async (queryParams) => {
     );
 }
 
+export const deleteContact = async (id) => {
+    return await fetch(`${import.meta.env.VITE_API_URL}/contacts/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Accept": "application/json",
+            "Authorization" : useLocalStorage('token', '').value
+        }
+     }
+    );
+}
+

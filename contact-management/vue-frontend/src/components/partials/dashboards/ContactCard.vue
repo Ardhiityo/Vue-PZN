@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 
 const { contacts } = defineProps({
   contacts: {
@@ -8,6 +8,8 @@ const { contacts } = defineProps({
     default: [],
   },
 });
+
+defineEmits(["handleDelete"]);
 </script>
 
 <template>
@@ -90,6 +92,7 @@ const { contacts } = defineProps({
             <i class="fas fa-edit mr-2"></i> Edit
           </a>
           <button
+            @click="$emit('handleDelete', contact.id)"
             class="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center"
           >
             <i class="fas fa-trash-alt mr-2"></i> Delete
