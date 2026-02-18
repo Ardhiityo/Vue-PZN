@@ -8,6 +8,12 @@ import {useLocalStorage} from "@vueuse/core";
 const router = createRouter({
   routes: [
     {
+      path: "/",
+      redirect: {
+        name: "auth.login",
+      },
+    },
+    {
       path: "/auth",
       component: () => import("./components/layouts/Auth.vue"),
       children: [
@@ -102,20 +108,34 @@ const router = createRouter({
 
 // Cara 2 : cek middleware autentikasi (tambahkan meta: {requiresAuth: true} disetiap komponen)
 router.beforeEach(async (to, from, next) => {
-  const token = useLocalStorage("token").value;
   if (to.meta.requiresAuth) {
-    if (token) {
-      const response = await userCurrent();
-      if (response.status === 200) {
-        return next(); // lanjut ke halaman tujuan
-      }
+    if (await hasValidToken()) {
+      return next(); // lanjut ke halaman tujuan
     }
     // kalau tidak ada token atau gagal validasi
     return next({name: "auth.login"});
+  } else {
+    // Kalau punya token valid tapi akses login/register maka redirect ke dashboard
+    if (await hasValidToken()) {
+      if (to.name === "auth.login" || to.name === "auth.register") {
+        return next({name: "dashboard"});
+      }
+    }
+    // route publik (tidak butuh login)
+    next();
   }
-
-  // route publik (tidak butuh login)
-  next();
 });
+
+// cek token
+async function hasValidToken() {
+  const token = useLocalStorage("token").value;
+  if (token) {
+    const response = await userCurrent();
+    if (response.status === 200) {
+      return true;
+    }
+  }
+  return false;
+}
 
 createApp(App).use(router).mount("#app");

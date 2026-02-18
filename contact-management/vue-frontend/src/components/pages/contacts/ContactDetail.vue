@@ -63,10 +63,8 @@ async function handleDelete(addressId) {
 <template>
   <section>
     <div class="flex items-center mb-6">
-      <RouterLink
-        :to="{ name: 'dashboard' }"
-        class="text-blue-400 hover:text-blue-300 mr-4 flex items-center transition-colors duration-200"
-      >
+      <RouterLink :to="{ name: 'dashboard' }"
+        class="text-blue-400 hover:text-blue-300 mr-4 flex items-center transition-colors duration-200">
         <i class="fas fa-arrow-left mr-2"></i> Back to Contacts
       </RouterLink>
       <h1 class="text-2xl font-bold text-white flex items-center">
@@ -75,14 +73,11 @@ async function handleDelete(addressId) {
     </div>
 
     <div
-      class="bg-gray-800 bg-opacity-80 rounded-xl shadow-custom border border-gray-700 overflow-hidden max-w-2xl mx-auto animate-fade-in"
-    >
+      class="bg-gray-800 bg-opacity-80 rounded-xl shadow-custom border border-gray-700 overflow-hidden max-w-2xl mx-auto animate-fade-in">
       <div class="p-8">
         <!-- Contact Header -->
         <div class="mb-8 text-center">
-          <div
-            class="w-20 h-20 bg-gradient rounded-full mx-auto flex items-center justify-center mb-4 shadow-lg"
-          >
+          <div class="w-20 h-20 bg-gradient rounded-full mx-auto flex items-center justify-center mb-4 shadow-lg">
             <i class="fas fa-user text-3xl text-white"></i>
           </div>
           <h2 class="text-2xl font-bold text-white mb-2">
@@ -95,8 +90,7 @@ async function handleDelete(addressId) {
         <div class="space-y-5 mb-8">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div
-              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70"
-            >
+              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70">
               <div class="flex items-center mb-2">
                 <i class="fas fa-user-tag text-blue-400 mr-2"></i>
                 <h3 class="text-gray-300 text-sm font-medium">First Name</h3>
@@ -104,8 +98,7 @@ async function handleDelete(addressId) {
               <p class="text-white text-lg ml-6">{{ contact.first_name }}</p>
             </div>
             <div
-              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70"
-            >
+              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70">
               <div class="flex items-center mb-2">
                 <i class="fas fa-user-tag text-blue-400 mr-2"></i>
                 <h3 class="text-gray-300 text-sm font-medium">Last Name</h3>
@@ -115,8 +108,7 @@ async function handleDelete(addressId) {
           </div>
 
           <div
-            class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70"
-          >
+            class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70">
             <div class="flex items-center mb-2">
               <i class="fas fa-envelope text-blue-400 mr-2"></i>
               <h3 class="text-gray-300 text-sm font-medium">Email</h3>
@@ -125,8 +117,7 @@ async function handleDelete(addressId) {
           </div>
 
           <div
-            class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70"
-          >
+            class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 transition-all duration-200 hover:bg-opacity-70">
             <div class="flex items-center mb-2">
               <i class="fas fa-phone text-blue-400 mr-2"></i>
               <h3 class="text-gray-300 text-sm font-medium">Phone</h3>
@@ -144,21 +135,14 @@ async function handleDelete(addressId) {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <!-- Add Address Card -->
             <div
-              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg border-2 border-dashed border-gray-600 shadow-md card-hover"
-            >
-              <RouterLink
-                :to="{
-                  name: 'dashboard.address.create',
-                  params: { id: contactId },
-                }"
-                class="block h-full"
-              >
-                <div
-                  class="flex flex-col items-center justify-center h-full text-center py-4"
-                >
+              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg border-2 border-dashed border-gray-600 shadow-md card-hover">
+              <RouterLink :to="{
+                name: 'dashboard.address.create',
+                params: { id: contactId },
+              }" class="block h-full">
+                <div class="flex flex-col items-center justify-center h-full text-center py-4">
                   <div
-                    class="w-16 h-16 bg-gradient rounded-full flex items-center justify-center mb-4 shadow-lg transform transition-transform duration-300 hover:scale-110"
-                  >
+                    class="w-16 h-16 bg-gradient rounded-full flex items-center justify-center mb-4 shadow-lg transform transition-transform duration-300 hover:scale-110">
                     <i class="fas fa-plus text-2xl text-white"></i>
                   </div>
                   <h4 class="text-lg font-semibold text-white">Add Address</h4>
@@ -166,15 +150,10 @@ async function handleDelete(addressId) {
               </RouterLink>
             </div>
 
-            <div
-              v-for="address in addresses"
-              :key="address.id"
-              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 card-hover"
-            >
+            <div v-for="address in addresses" :key="address.id"
+              class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 card-hover">
               <div class="flex items-center mb-3">
-                <div
-                  class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3 shadow-md"
-                >
+                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3 shadow-md">
                   <i class="fas fa-home text-white"></i>
                 </div>
                 <h4 class="text-lg font-semibold text-white">Home Address</h4>
@@ -207,19 +186,15 @@ async function handleDelete(addressId) {
                 </p>
               </div>
               <div class="flex justify-end space-x-3">
-                <RouterLink
-                  :to="{
-                    name: 'dashboard.address.edit',
-                    params: { id: contactId, addressId: address.id },
-                  }"
-                  class="px-4 py-2 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center"
-                >
+                <RouterLink :to="{
+                  name: 'dashboard.address.edit',
+                  params: { id: contactId, addressId: address.id },
+                }"
+                  class="px-4 py-2 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center">
                   <i class="fas fa-edit mr-2"></i> Edit
                 </RouterLink>
-                <button
-                  @click="handleDelete(address.id)"
-                  class="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center"
-                >
+                <button @click="handleDelete(address.id)"
+                  class="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center">
                   <i class="fas fa-trash-alt mr-2"></i> Delete
                 </button>
               </div>
@@ -229,16 +204,12 @@ async function handleDelete(addressId) {
 
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-4">
-          <RouterLink
-            :to="{ name: 'dashboard' }"
-            class="px-5 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 flex items-center shadow-md"
-          >
+          <RouterLink :to="{ name: 'dashboard' }"
+            class="px-5 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 flex items-center shadow-md">
             <i class="fas fa-arrow-left mr-2"></i> Back
           </RouterLink>
-          <RouterLink
-            :to="{ name: 'dashboard.contact.edit', params: { id: contactId } }"
-            class="px-5 py-3 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 flex items-center"
-          >
+          <RouterLink :to="{ name: 'dashboard.contact.edit', params: { id: contactId } }"
+            class="px-5 py-3 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 flex items-center">
             <i class="fas fa-user-edit mr-2"></i> Edit Contact
           </RouterLink>
         </div>
