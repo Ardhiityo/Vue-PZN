@@ -39,6 +39,7 @@ async function handleUpdate() {
   const responseBody = await response.json();
   if (response.status === 200) {
     resetErrorBag();
+    resetInput();
     success("Yeay, the contact successfully updated!");
   } else {
     errors.first_name = responseBody?.first_name?.length
@@ -57,6 +58,13 @@ function resetErrorBag() {
   errors.last_name = "";
   errors.email = "";
   errors.phone = "";
+}
+
+function resetInput() {
+  contact.first_name = "";
+  contact.last_name = "";
+  contact.email = "";
+  contact.phone = "";
 }
 </script>
 
