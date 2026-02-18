@@ -46,6 +46,11 @@ const router = createRouter({
                     component: () => import('./components/pages/contacts/ContactCreate.vue')
                 },
                 {
+                    path: 'contacts/:id',
+                    name: 'dashboard.contact.detail',
+                    component: () => import('./components/pages/contacts/ContactDetail.vue')
+                },
+                {
                     path: 'contacts/:id/edit',
                     name: 'dashboard.contact.edit',
                     component: () => import('./components/pages/contacts/ContactEdit.vue')

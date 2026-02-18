@@ -45,8 +45,8 @@ defineEmits(["handleDelete"]);
       class="bg-gray-800 bg-opacity-80 rounded-xl shadow-custom border border-gray-700 overflow-hidden card-hover animate-fade-in"
     >
       <div class="p-6">
-        <a
-          href="detail_contact.html"
+        <RouterLink
+          :to="{ name: 'dashboard.contact.detail', params: { id: contact.id } }"
           class="block cursor-pointer hover:bg-gray-700 rounded-lg transition-all duration-200 p-3"
         >
           <div class="flex items-center mb-3">
@@ -83,7 +83,7 @@ defineEmits(["handleDelete"]);
               <span>{{ contact.phone }}</span>
             </p>
           </div>
-        </a>
+        </RouterLink>
         <div class="mt-4 flex justify-end space-x-3">
           <RouterLink
             :to="{ name: 'dashboard.contact.edit', params: { id: contact.id } }"
