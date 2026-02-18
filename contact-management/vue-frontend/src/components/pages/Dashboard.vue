@@ -1,7 +1,7 @@
 <script setup>
 import SearchContact from "../partials/dashboards/SearchContact.vue";
 import ContactCard from "../partials/dashboards/ContactCard.vue";
-import Pagination from "../partials/Pagination.vue";
+import Pagination from "../partials/dashboards/Pagination.vue";
 
 import { fetchContact, deleteContact } from "@/lib/api/ContactApi";
 
@@ -45,7 +45,7 @@ async function getContact() {
 }
 
 function nextPage() {
-  if (queryParams.page < meta.lastPage) {
+  if (queryParams.page < pagination.lastPage) {
     queryParams.page++;
   }
 }
