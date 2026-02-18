@@ -64,6 +64,12 @@ const router = createRouter({
           component: () =>
             import("./components/pages/addresses/AddressCreate.vue"),
         },
+        {
+          path: "contacts/:id/addresses/:addressId/edit",
+          name: "dashboard.address.edit",
+          component: () =>
+            import("./components/pages/addresses/AddressEdit.vue"),
+        },
       ],
     },
   ],

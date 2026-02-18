@@ -1,6 +1,7 @@
 <script setup>
 import { detailContact } from "@/lib/api/ContactApi";
-import { onBeforeMount, reactive } from "vue";
+import { fetchAddress } from "@/lib/api/AddressApi";
+import { onBeforeMount, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
@@ -14,7 +15,14 @@ const contact = reactive({
   phone: "",
 });
 
+const addresses = ref([]);
+
 onBeforeMount(async () => {
+  await getContact();
+  await getAddress();
+});
+
+async function getContact() {
   const response = await detailContact(contactId);
   const responseBody = await response.json();
   if (response.status === 200) {
@@ -25,7 +33,17 @@ onBeforeMount(async () => {
   } else {
     error("Ups, something wrong!");
   }
-});
+}
+
+async function getAddress() {
+  const response = await fetchAddress(contactId);
+  const responseBody = await response.json();
+  if (response.status === 200) {
+    addresses.value = responseBody.data;
+  } else {
+    error("Ups, something wrong!");
+  }
+}
 </script>
 
 <template>
@@ -134,8 +152,9 @@ onBeforeMount(async () => {
               </RouterLink>
             </div>
 
-            <!-- Address Card 1 -->
             <div
+              v-for="address in addresses"
+              :key="address.id"
               class="bg-gray-700 bg-opacity-50 p-5 rounded-lg shadow-md border border-gray-600 card-hover"
             >
               <div class="flex items-center mb-3">
@@ -150,36 +169,39 @@ onBeforeMount(async () => {
                 <p class="flex items-center">
                   <i class="fas fa-road text-gray-500 w-6"></i>
                   <span class="font-medium w-24">Street:</span>
-                  <span>123 Main St</span>
+                  <span>{{ address.street }}</span>
                 </p>
                 <p class="flex items-center">
                   <i class="fas fa-city text-gray-500 w-6"></i>
                   <span class="font-medium w-24">City:</span>
-                  <span>New York</span>
+                  <span>{{ address.city }}</span>
                 </p>
                 <p class="flex items-center">
                   <i class="fas fa-map text-gray-500 w-6"></i>
                   <span class="font-medium w-24">Province:</span>
-                  <span>NY</span>
+                  <span>{{ address.province }}</span>
                 </p>
                 <p class="flex items-center">
                   <i class="fas fa-flag text-gray-500 w-6"></i>
                   <span class="font-medium w-24">Country:</span>
-                  <span>USA</span>
+                  <span>{{ address.country }}</span>
                 </p>
                 <p class="flex items-center">
                   <i class="fas fa-mailbox text-gray-500 w-6"></i>
                   <span class="font-medium w-24">Postal Code:</span>
-                  <span>10001</span>
+                  <span>{{ address.postal_code }}</span>
                 </p>
               </div>
               <div class="flex justify-end space-x-3">
-                <a
-                  href="edit_address.html"
+                <RouterLink
+                  :to="{
+                    name: 'dashboard.address.edit',
+                    params: { id: contactId, addressId: address.id },
+                  }"
                   class="px-4 py-2 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center"
                 >
                   <i class="fas fa-edit mr-2"></i> Edit
-                </a>
+                </RouterLink>
                 <button
                   class="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center"
                 >
@@ -198,12 +220,12 @@ onBeforeMount(async () => {
           >
             <i class="fas fa-arrow-left mr-2"></i> Back
           </RouterLink>
-          <a
-            href="edit_contact.html"
+          <RouterLink
+            :to="{ name: 'dashboard.contact.edit', params: { id: contactId } }"
             class="px-5 py-3 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 flex items-center"
           >
             <i class="fas fa-user-edit mr-2"></i> Edit Contact
-          </a>
+          </RouterLink>
         </div>
       </div>
     </div>

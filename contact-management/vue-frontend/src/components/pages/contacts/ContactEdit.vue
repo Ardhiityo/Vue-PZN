@@ -39,7 +39,6 @@ async function handleUpdate() {
   const responseBody = await response.json();
   if (response.status === 200) {
     resetErrorBag();
-    resetInput();
     success("Yeay, the contact successfully updated!");
   } else {
     errors.first_name = responseBody?.first_name?.length
@@ -106,7 +105,6 @@ function resetInput() {
                   name="first_name"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter first name"
-                  value="John"
                   required
                   v-model="contact.first_name"
                 />
@@ -136,7 +134,6 @@ function resetInput() {
                   name="last_name"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter last name"
-                  value="Doe"
                   v-model="contact.last_name"
                 />
               </div>
@@ -164,7 +161,6 @@ function resetInput() {
                 name="email"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Enter email address"
-                value="john.doe@example.com"
                 required
                 v-model="contact.email"
               />
@@ -192,7 +188,6 @@ function resetInput() {
                 name="phone"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Enter phone number"
-                value="+1 (555) 123-4567"
                 required
                 v-model="contact.phone"
               />

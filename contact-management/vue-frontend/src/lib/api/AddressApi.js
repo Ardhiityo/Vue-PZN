@@ -21,56 +21,49 @@ export const createAddress = async (contactId, address) => {
   );
 };
 
-export const fetchContact = async (queryParams) => {
-  const url = new URL(`${import.meta.env.VITE_API_URL}/contacts`);
-  if (queryParams.name) url.searchParams.append("name", queryParams.name);
-  if (queryParams.email) url.searchParams.append("email", queryParams.email);
-  if (queryParams.phone) url.searchParams.append("phone", queryParams.phone);
-  if (queryParams.page) url.searchParams.append("page", queryParams.page);
-
-  return await fetch(url, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: useLocalStorage("token", "").value,
+export const fetchAddress = async (contactId) => {
+  return await fetch(
+    `${import.meta.env.VITE_API_URL}/contacts/${contactId}/addresses`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: useLocalStorage("token", "").value,
+      },
     },
-  });
+  );
 };
 
-export const deleteContact = async (id) => {
-  return await fetch(`${import.meta.env.VITE_API_URL}/contacts/${id}`, {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      Authorization: useLocalStorage("token", "").value,
+export const detailAddress = async (contactId, addressId) => {
+  return await fetch(
+    `${import.meta.env.VITE_API_URL}/contacts/${contactId}/addresses/${addressId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: useLocalStorage("token", "").value,
+      },
     },
-  });
+  );
 };
 
-export const detailContact = async (id) => {
-  return await fetch(`${import.meta.env.VITE_API_URL}/contacts/${id}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: useLocalStorage("token", "").value,
+export const updateAddress = async (contactId, addressId, address) => {
+  return await fetch(
+    `${import.meta.env.VITE_API_URL}/contacts/${contactId}/addresses/${addressId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: useLocalStorage("token", "").value,
+      },
+      body: JSON.stringify({
+        street: address.street,
+        city: address.city,
+        province: address.province,
+        country: address.country,
+        postal_code: address.postal_code,
+      }),
     },
-  });
-};
-
-export const updateContact = async (id, contact) => {
-  return await fetch(`${import.meta.env.VITE_API_URL}/contacts/${id}`, {
-    method: "PATCH",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: useLocalStorage("token", "").value,
-    },
-    body: JSON.stringify({
-      first_name: contact.first_name,
-      last_name: contact.last_name,
-      email: contact.email,
-      phone: contact.phone,
-    }),
-  });
+  );
 };

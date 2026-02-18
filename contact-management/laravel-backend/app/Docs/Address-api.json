@@ -4,7 +4,11 @@
         "title": "Address API",
         "version": "1.0"
     },
-    "servers": [{ "url": "https://api.server.test/v1" }],
+    "servers": [
+        {
+            "url": "https://api.server.test/v1"
+        }
+    ],
     "paths": {
         "/api/contacts/{contact_id}/addresses": {
             "get": {
@@ -40,7 +44,9 @@
                                             "items": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "id": { "type": "integer" },
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
                                                     "contact_id": {
                                                         "type": "integer"
                                                     },
@@ -106,13 +112,17 @@
                         "name": "Authorization",
                         "in": "header",
                         "required": true,
-                        "schema": { "type": "string" }
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "contact_id",
                         "in": "path",
                         "required": true,
-                        "schema": { "type": "integer" }
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -167,7 +177,9 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "id": { "type": "integer" },
+                                                "id": {
+                                                    "type": "integer"
+                                                },
                                                 "contact_id": {
                                                     "type": "integer"
                                                 },
@@ -255,7 +267,9 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "id": { "type": "integer" },
+                                                "id": {
+                                                    "type": "integer"
+                                                },
                                                 "contact_id": {
                                                     "type": "integer"
                                                 },
@@ -302,26 +316,32 @@
                     }
                 }
             },
-            "put": {
+            "patch": {
                 "summary": "Update Address by ID",
                 "parameters": [
                     {
                         "name": "Authorization",
                         "in": "header",
                         "required": true,
-                        "schema": { "type": "string" }
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "contact_id",
                         "in": "path",
                         "required": true,
-                        "schema": { "type": "integer" }
+                        "schema": {
+                            "type": "integer"
+                        }
                     },
                     {
                         "name": "address_id",
                         "in": "path",
                         "required": true,
-                        "schema": { "type": "integer" }
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -373,7 +393,9 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "id": { "type": "integer" },
+                                                "id": {
+                                                    "type": "integer"
+                                                },
                                                 "contact_id": {
                                                     "type": "integer"
                                                 },
@@ -480,19 +502,25 @@
                         "name": "Authorization",
                         "in": "header",
                         "required": true,
-                        "schema": { "type": "string" }
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "contact_id",
                         "in": "path",
                         "required": true,
-                        "schema": { "type": "integer" }
+                        "schema": {
+                            "type": "integer"
+                        }
                     },
                     {
                         "name": "address_id",
                         "in": "path",
                         "required": true,
-                        "schema": { "type": "integer" }
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "responses": {

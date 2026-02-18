@@ -1,14 +1,19 @@
 <script setup>
-import { onBeforeMount, reactive } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { error, success } from "@/lib/alert";
+import { detailAddress, updateAddress } from "@/lib/api/AddressApi";
 import { detailContact } from "@/lib/api/ContactApi";
-import { createAddress } from "@/lib/api/AddressApi";
-import { success, error } from "@/lib/alert";
+import { onBeforeMount, reactive } from "vue";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
-const router = useRouter();
 
 const contactId = route.params.id;
+const addressId = route.params.addressId;
+
+onBeforeMount(async () => {
+  await getContact();
+  await getAddress();
+});
 
 const contact = reactive({
   first_name: "",
@@ -33,7 +38,7 @@ const errors = reactive({
   postal_code: "",
 });
 
-onBeforeMount(async () => {
+async function getContact() {
   const response = await detailContact(contactId);
   const responseBody = await response.json();
   if (response.status === 200) {
@@ -44,19 +49,30 @@ onBeforeMount(async () => {
   } else {
     error("Ups, something wrong!");
   }
-});
+}
 
-async function handleCreateAddress() {
-  const response = await createAddress(contactId, address);
+async function getAddress() {
+  const response = await detailAddress(contactId, addressId);
   const responseBody = await response.json();
-  if (response.status === 201) {
+
+  if (response.status === 200) {
+    address.street = responseBody.data.street;
+    address.city = responseBody.data.city;
+    address.country = responseBody.data.country;
+    address.province = responseBody.data.province;
+    address.postal_code = responseBody.data.postal_code;
+  } else {
+    error("Ups, something wrong!");
+  }
+}
+
+async function handleUpdateAddress() {
+  const response = await updateAddress(contactId, addressId, address);
+  const responseBody = await response.json();
+
+  if (response.status === 200) {
     resetErrorBag();
-    resetInput();
-    router.push({
-      name: "dashboard.contact.detail",
-      params: { id: contactId },
-    });
-    success("Yeay, address created successfuly!");
+    success("Yeay, address updated successfuly!");
   } else {
     errors.street = responseBody?.street?.length
       ? responseBody?.street[0]
@@ -96,16 +112,13 @@ function resetErrorBag() {
   <section>
     <div class="flex items-center mb-6">
       <RouterLink
-        :to="{
-          name: 'dashboard.contact.detail',
-          params: { id: contactId },
-        }"
+        :to="{ name: 'dashboard.contact.detail', params: { id: contactId } }"
         class="text-blue-400 hover:text-blue-300 mr-4 flex items-center transition-colors duration-200"
       >
         <i class="fas fa-arrow-left mr-2"></i> Back to Contact Details
       </RouterLink>
       <h1 class="text-2xl font-bold text-white flex items-center">
-        <i class="fas fa-plus-circle text-blue-400 mr-3"></i> Add New Address
+        <i class="fas fa-map-marker-alt text-blue-400 mr-3"></i> Edit Address
       </h1>
     </div>
 
@@ -122,9 +135,7 @@ function resetErrorBag() {
               <i class="fas fa-user text-white"></i>
             </div>
             <div>
-              <h2 class="text-xl font-semibold text-white">
-                {{ contact.first_name }} {{ contact.last_name }}
-              </h2>
+              <h2 class="text-xl font-semibold text-white"></h2>
               <p class="text-gray-300 text-sm">
                 {{ contact.email }} • {{ contact.phone }}
               </p>
@@ -132,7 +143,7 @@ function resetErrorBag() {
           </div>
         </div>
 
-        <form @submit.prevent="handleCreateAddress">
+        <form @submit.prevent="handleUpdateAddress">
           <div class="mb-5">
             <label
               for="street"
@@ -151,8 +162,8 @@ function resetErrorBag() {
                 name="street"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Enter street address"
-                required
                 v-model="address.street"
+                required
               />
             </div>
             <p v-if="errors.street" class="text-red-500 text-sm font-bold">
@@ -179,8 +190,8 @@ function resetErrorBag() {
                   name="city"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter city"
-                  required
                   v-model="address.city"
+                  required
                 />
               </div>
               <p v-if="errors.city" class="text-red-500 text-sm font-bold">
@@ -205,8 +216,8 @@ function resetErrorBag() {
                   name="province"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter province or state"
-                  required
                   v-model="address.province"
+                  required
                 />
               </div>
               <p v-if="errors.province" class="text-red-500 text-sm font-bold">
@@ -234,8 +245,8 @@ function resetErrorBag() {
                   name="country"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter country"
-                  required
                   v-model="address.country"
+                  required
                 />
               </div>
               <p v-if="errors.country" class="text-red-500 text-sm font-bold">
@@ -255,13 +266,13 @@ function resetErrorBag() {
                   <i class="fas fa-mail-bulk text-gray-500"></i>
                 </div>
                 <input
-                  type="number"
+                  type="text"
                   id="postal_code"
                   name="postal_code"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter postal code"
-                  required
                   v-model="address.postal_code"
+                  required
                 />
               </div>
               <p
@@ -287,7 +298,7 @@ function resetErrorBag() {
               type="submit"
               class="px-5 py-3 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 flex items-center"
             >
-              <i class="fas fa-plus-circle mr-2"></i> Add Address
+              <i class="fas fa-save mr-2"></i> Save Changes
             </button>
           </div>
         </form>
