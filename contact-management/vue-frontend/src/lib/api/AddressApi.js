@@ -67,3 +67,16 @@ export const updateAddress = async (contactId, addressId, address) => {
     },
   );
 };
+
+export const deleteAddress = async (contactId, addressId) => {
+  return await fetch(
+    `${import.meta.env.VITE_API_URL}/contacts/${contactId}/addresses/${addressId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: useLocalStorage("token", "").value,
+      },
+    },
+  );
+};

@@ -1,8 +1,10 @@
 <script setup>
 import { detailContact } from "@/lib/api/ContactApi";
-import { fetchAddress } from "@/lib/api/AddressApi";
+import { deleteAddress, fetchAddress } from "@/lib/api/AddressApi";
 import { onBeforeMount, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
+
+import { confirm, error, success } from "@/lib/alert";
 
 const route = useRoute();
 
@@ -42,6 +44,18 @@ async function getAddress() {
     addresses.value = responseBody.data;
   } else {
     error("Ups, something wrong!");
+  }
+}
+
+async function handleDelete(addressId) {
+  if (await confirm("You won't be able to revert this!")) {
+    const response = await deleteAddress(contactId, addressId);
+    if (response.status === 200) {
+      await getAddress();
+      success("Address has been deleted!");
+    } else {
+      error("Ups, something wrong!");
+    }
   }
 }
 </script>
@@ -203,6 +217,7 @@ async function getAddress() {
                   <i class="fas fa-edit mr-2"></i> Edit
                 </RouterLink>
                 <button
+                  @click="handleDelete(address.id)"
                   class="px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-md flex items-center"
                 >
                   <i class="fas fa-trash-alt mr-2"></i> Delete
