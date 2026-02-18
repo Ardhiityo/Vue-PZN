@@ -1,7 +1,9 @@
 <script setup>
-import { reactive } from "vue";
-import { createContact } from "@/lib/api/ContactApi";
-import { success } from "@/lib/alert";
+import { onBeforeMount, reactive } from "vue";
+
+import { detailContact, updateContact } from "@/lib/api/ContactApi";
+import { useRoute } from "vue-router";
+import { error, success } from "@/lib/alert";
 
 const contact = reactive({
   first_name: "",
@@ -17,13 +19,27 @@ const errors = reactive({
   phone: "",
 });
 
-async function handleCreateContact() {
-  const response = await createContact(contact);
+const route = useRoute();
+
+onBeforeMount(async () => {
+  const response = await detailContact(route.params.id);
   const responseBody = await response.json();
-  if (response.status === 201) {
-    resetInput();
+  if (response.status === 200) {
+    contact.first_name = responseBody.data.first_name;
+    contact.last_name = responseBody.data.last_name;
+    contact.email = responseBody.data.email;
+    contact.phone = responseBody.data.phone;
+  } else {
+    error("Ups, something wrong!");
+  }
+});
+
+async function handleUpdate() {
+  const response = await updateContact(route.params.id, contact);
+  const responseBody = await response.json();
+  if (response.status === 200) {
     resetErrorBag();
-    success("Yeay, contact created successfuly!");
+    success("Yeay, the contact successfully updated!");
   } else {
     errors.first_name = responseBody?.first_name?.length
       ? responseBody?.first_name[0]
@@ -42,13 +58,6 @@ function resetErrorBag() {
   errors.email = "";
   errors.phone = "";
 }
-
-function resetInput() {
-  contact.first_name = "";
-  contact.last_name = "";
-  contact.email = "";
-  contact.phone = "";
-}
 </script>
 
 <template>
@@ -61,7 +70,7 @@ function resetInput() {
         <i class="fas fa-arrow-left mr-2"></i> Back to Contacts
       </RouterLink>
       <h1 class="text-2xl font-bold text-white flex items-center">
-        <i class="fas fa-user-plus text-blue-400 mr-3"></i> Create New Contact
+        <i class="fas fa-user-edit text-blue-400 mr-3"></i> Edit Contact
       </h1>
     </div>
 
@@ -69,7 +78,7 @@ function resetInput() {
       class="bg-gray-800 bg-opacity-80 rounded-xl shadow-custom border border-gray-700 overflow-hidden max-w-2xl mx-auto animate-fade-in"
     >
       <div class="p-8">
-        <form @submit.prevent="handleCreateContact">
+        <form @submit.prevent="handleUpdate">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
             <div>
               <label
@@ -89,6 +98,7 @@ function resetInput() {
                   name="first_name"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter first name"
+                  value="John"
                   required
                   v-model="contact.first_name"
                 />
@@ -118,6 +128,7 @@ function resetInput() {
                   name="last_name"
                   class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                   placeholder="Enter last name"
+                  value="Doe"
                   v-model="contact.last_name"
                 />
               </div>
@@ -145,6 +156,7 @@ function resetInput() {
                 name="email"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Enter email address"
+                value="john.doe@example.com"
                 required
                 v-model="contact.email"
               />
@@ -172,6 +184,7 @@ function resetInput() {
                 name="phone"
                 class="w-full pl-10 pr-3 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
                 placeholder="Enter phone number"
+                value="+1 (555) 123-4567"
                 required
                 v-model="contact.phone"
               />
@@ -192,7 +205,7 @@ function resetInput() {
               type="submit"
               class="px-5 py-3 bg-gradient text-white rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 font-medium shadow-lg transform hover:-translate-y-0.5 flex items-center"
             >
-              <i class="fas fa-plus-circle mr-2"></i> Create Contact
+              <i class="fas fa-save mr-2"></i> Save Changes
             </button>
           </div>
         </form>

@@ -48,3 +48,32 @@ export const deleteContact = async (id) => {
     );
 }
 
+export const detailContact = async (id) => {
+    return await fetch(`${import.meta.env.VITE_API_URL}/contacts/${id}`, {
+        method: 'GET',
+        headers: {
+            "Accept": "application/json",
+            "Authorization" : useLocalStorage('token', '').value
+        }
+     }
+    );
+}
+
+export const updateContact = async (id, contact) => {
+    return await fetch(`${import.meta.env.VITE_API_URL}/contacts/${id}`, {
+        method: 'PATCH',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization" : useLocalStorage('token', '').value
+        },
+           body: JSON.stringify({
+            first_name: contact.first_name,
+            last_name: contact.last_name,
+            email: contact.email,
+            phone: contact.phone
+        })
+     }
+    );
+}
+
